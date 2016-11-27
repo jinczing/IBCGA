@@ -7,14 +7,13 @@ This version use Python and libsvm to implemet the whole feature selection and
 svm model building system.
 
 Before you use, some files are needed:
-1. ibcga_svc_ma.py : this is the main file to execute IBCGA-SVC
-2. IGAFrmae.py : this file contains IBCGA and its operators
-3. libsvm.dll : If you use the Win32 system, the version contain the libsvm operators in win32 system
-4. libsvm.so.2 : If you use the Linux system, the version contain the libsvm operators in win32 system
-5. svm.py : the API of libsvm
-6. svmutil.py : some useful tools use the libsvm API. PLEASE use this version, because the author 
-                modify some little scripts.
-7. your training file in libsvm format
+##### 1. ibcga_svc_ma.py : this is the main file to execute IBCGA-SVC
+##### 2. IGAFrmae.py : this file contains IBCGA and its operators
+##### 3. libsvm.dll : If you use the Win32 system, the version contain the libsvm operators in win32 system
+##### 4. libsvm.so.2 : If you use the Linux system, the version contain the libsvm operators in win32 system
+##### 5. svm.py : the API of libsvm
+##### 6. svmutil.py : some useful tools use the libsvm API. PLEASE use this version, because the author modify some little scripts.
+##### 7. your training file in libsvm format
 
 ## parameters 
 The SVC use RBF kernel, and use the classical C-SVC in libsvm. This parameters can be easy modify from 
