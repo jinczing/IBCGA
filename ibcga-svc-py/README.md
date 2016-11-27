@@ -42,12 +42,13 @@ For example:
    left 10, the evolution process will stop.
 
 Some suggestion:
-1. -B usually set 50 or 40 depending on the needs
-2. -E usually set to 10 or 5 depending on the needs
-3. Each run will generate a report (report1, report2). If the folder already contain the files, ibcga_svc_ma.py 
-   will skip to aviod override the existing file.
-4. Since GA is a non-determinstic method for looking for the optimal solution, executing more than one run is 
+* -B usually set 50 or 40 depending on the needs
+* -E usually set to 10 or 5 depending on the needs
+* Since GA is a non-determinstic method for looking for the optimal solution, executing more than one run is 
    necessary. The suggestion is 30 runs.
+* Each run will generate a report (report1, report2). If the folder already contain the files, ibcga_svc_ma.py 
+   will skip to aviod override the existing file.
+
 
 
                 
