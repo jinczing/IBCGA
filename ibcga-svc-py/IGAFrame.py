@@ -280,7 +280,7 @@ class GeneticOperators(object):
             for OA_row in OA:
                 OA_ele_no = 0
                 for OA_ele in OA_row:
-                    MED_list[OA_ele_no][OA_ele] += fitness_arr[OA_row_no]
+                    MED_list[OA_ele_no][OA_ele] += float(fitness_arr[OA_row_no])
                     OA_ele_no += 1
                     pass
                 OA_row_no += 1

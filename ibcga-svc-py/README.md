@@ -40,7 +40,7 @@ For example:
    process. After 50 generation, the population will turn on one gene of each individual. Ultil the features 
    left 10, the evolution process will stop.
 
-## Some suggestion:
+## Some suggestions:
 * -B usually set 50 or 40 depending on the needs
 * -E usually set to 10 or 5 depending on the needs
 * Since GA is a non-determinstic method for looking for the optimal solution, executing more than one run is 

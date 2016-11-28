@@ -271,15 +271,17 @@ class IBCGA_SVC(IGAFrame.GeneticOperators):
     pass
 
 class GA_fitness_thread(threading.Thread):
-    def __init__(self, ind, ibcga_op):
+    def __init__(self, ind, ibcgaopr):
         threading.Thread.__init__(self)
         self.ind = ind
-        self.ibcga_op = ibcga_op
+        self.ibcgaopr = ibcgaopr
         pass
     
     def run(self):
-        self.ind[0] = self.ibcga_op.fitness(self.ind[1], self.ind[0])
-        return self
+        (fitness_value, chromo) = self.ind
+        res = self.ibcgaopr.fitness(chromo, fitness_value)
+        print(res)
+        self.ind = (res,chromo)
         pass
     
     
@@ -287,10 +289,10 @@ if __name__ == '__main__':
     cmdpar = argparse.ArgumentParser()
     #cmdpar.add_argument("-F", "--File", help=" indicate the training file")
     cmdpar.add_argument("-G", "--generation", default = 50, type = int , help=" Set the generation number of IBCGA (default: 10)")
-    cmdpar.add_argument("-O", "--population_size", default = 50, type = int , help=" Set the population size of IBCGA (default: 50)")
+    cmdpar.add_argument("-O", "--population_size", default = 50, type = int , help=" Set the population size of IHGA (default: 50)")
     cmdpar.add_argument("-v", "--nfold", default = 10, type = int , help=" Set the cross validation number (default: 10)")
-    cmdpar.add_argument("-B", "--begin", default = 40, type = int , help=" Set the feature number in the begin (default: 40)")
-    cmdpar.add_argument("-E", "--end", default = 10, type = int , help=" Set the feature number in the end (default: 10)")
+    cmdpar.add_argument("-B", "--begin", default = 40, type = int , help=" Set the cross validation number (default: 40)")
+    cmdpar.add_argument("-E", "--end", default = 10, type = int , help=" Set the cross validation number (default: 10)")
     cmdpar.add_argument("-F", "--trainfile", type = str , help=" Indicate the training file (default: none)")
 
     args = cmdpar.parse_args()
