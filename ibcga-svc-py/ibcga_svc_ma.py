@@ -17,11 +17,13 @@ class IBCGA_SVC(IGAFrame.GeneticOperators):
                  limit= 500, 
                  size= 128,
                  prob_crossover = 0.9, 
-                 prob_mutation = 0.2
+                 prob_mutation = 0.2,
+                 sample_percentage = 100
                  ):
         self.nfold = nfold
         self.n_dimention = int(n_dimention) + 4 + 4
         self.feature_len = int(n_dimention)
+        self.sample_percentage = sample_percentage
         self.generation = 0
         self.label = label
         self.feature = feature
@@ -99,7 +101,7 @@ class IBCGA_SVC(IGAFrame.GeneticOperators):
                   ' -c ' + str(ddata['params']['c']) + \
                   ' -g ' + str(ddata['params']['gamma'])+ \
                   ' -q'
-            res = svmutil.svm_train(self.label, ddata['Ddata'], cmd)
+            res = svmutil.svm_train(ddate['label'], ddata['Ddata'], cmd)
             return res
             pass
         pass
@@ -242,7 +244,17 @@ class IBCGA_SVC(IGAFrame.GeneticOperators):
         feature_arr = [i for i in range(0, self.feature_len) if in_arr[i] == 1]
         
         sub_training_data = []
-        for training_data_x in self.feature:
+
+        # sample from original dataset
+        samples_num = (self.sample_percentage/100) * len(self.feature)
+        sample_list = random.sample([x for x in range(len(self.feature))])
+        features = []
+        labels = []
+        for index in sample_list:
+        	features.append(self.feature[index])
+        	labels.append(self.label[index])
+
+        for training_data_x in features:
             new_idx = 0
             new_dataset = {}
             for i in feature_arr:
@@ -256,7 +268,8 @@ class IBCGA_SVC(IGAFrame.GeneticOperators):
         
         return({'params':params,
                 'features':feature_arr,
-                'Ddata':sub_training_data
+                'label': labels
+                'Ddata':sub_training_data,
                 })
         pass
 
@@ -294,6 +307,7 @@ if __name__ == '__main__':
     cmdpar.add_argument("-B", "--begin", default = 40, type = int , help=" Set the cross validation number (default: 40)")
     cmdpar.add_argument("-E", "--end", default = 10, type = int , help=" Set the cross validation number (default: 10)")
     cmdpar.add_argument("-F", "--trainfile", type = str , help=" Indicate the training file (default: none)")
+    cmdpar.add_argument("-P", "--sample_percentage", default = 100, type = int, help=" Set the percentage of sample from origin dataset (default: 100)")
 
     args = cmdpar.parse_args()
 
@@ -319,7 +333,8 @@ if __name__ == '__main__':
                                        limit = args.generation, 
                                        size = args.population_size,
                                        begin = args.begin,
-                                       end = args.end
+                                       end = args.end,
+                                       sample_percentage = args.sample_percentage
                                        )).run()
     pass
 
